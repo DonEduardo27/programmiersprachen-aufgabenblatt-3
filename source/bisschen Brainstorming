@@ -1,0 +1,15 @@
+Sequentielle Container: vector, deque und list;
+Die Elemente sind sozusagen durchnummeriert und für den Nutzer sieht es aus, als wären sie nacheinander aufgelistet, was intern nicht immer der fall ist.
+
+Assoziative Container:  set, multiset, map und multimap;
+Hier sind die Elemente sogenannten "Keys" zugeordnet. Man braucht also Information A (wie im Beispiel der Name) um Information B (die Nummer) zu erhalten.
+
+
+Speichern der Punkte eines Polygons: 
+Es gibt fast keinen Grund, nicht einen Vektor zu benutzen, da man ja gegebenenfalls auf jeden Punkt gleichwertig zugreifen möchte, um den gegebenenfalls zu ändern. Wenn man jetzt aber nichts ändern will, sondern nur zeichnen, ergo die Punkte nacheinander verbinden, geht eine List besser. Man würde drüberiterieren und Iterator mit Iterator+1 verbinden.
+
+Zuordnung von Farbnamen und entsprechenden RGB-Werten:
+Map. Oben genanntes Beispiel entspricht doch dem der Telefonnummern. Als Key nimmt man sowas wie Green, Red und Blue etc. denen dann eine Color Struckt zugeordnet ist. Mein Vorschlag.
+
+FIFO-Warteschlange von Druckaufträgen:
+Das Stichwort FIFO stand in der Vorlesung in Verbindung mit deque. Wenn wir also neue Aufträge hinten anhängen und bearbeitete vorne entfernen, wie das bei FIFO ist, wird deque nicht alle Elemente vorrutschen, was lange dauern würde, sondern Nummer 2 einfach Nummer 1 nennen usw. Sauber!
