@@ -20,3 +20,14 @@ target_link_libraries(aufgabe2bis4
   ${GLFW_LIBRARIES}
   m)
 add_dependencies(aufgabe2bis4 glfw ${COPY_BINARY})
+
+# Build tests
+add_executable(aufgabe5
+  aufgabe5.cpp
+  )
+  
+target_link_libraries(aufgabe5
+  glfw
+  ${GLFW_LIBRARIES}
+  m)
+add_dependencies(aufgabe5 glfw ${COPY_BINARY})
