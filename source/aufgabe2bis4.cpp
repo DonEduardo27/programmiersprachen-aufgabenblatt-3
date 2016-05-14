@@ -5,6 +5,7 @@
 # include <iterator>
 # include <algorithm>
 # include <set>
+# include <map>
 
 int main ()
 {
@@ -18,9 +19,9 @@ int main ()
 	std::vector<unsigned int> vRandNum (100);//vector random numbers
 
 	std::copy(std::begin(hRandNum), std::end(hRandNum), std::begin(vRandNum));
-
-	std::copy(std::begin(hRandNum), std::end(hRandNum), std::ostream_iterator<int>( std::cout , " \n " ));	
-
+	std::cout<<"\nUnser Vektor enthalt folgende Zahlen:\n"<<std::endl;
+	std::copy(std::begin(hRandNum), std::end(hRandNum), std::ostream_iterator<int>( std::cout , ", " ));	
+	std::cout<<std::endl;
     std::list <unsigned int> notInRand;
     std::set <unsigned int> howManyInRand;
 
@@ -28,7 +29,7 @@ int main ()
 	{
 		howManyInRand.insert(i);
 	}
-	std::cout<<"In der Liste sind "<<howManyInRand.size()<<" verschiedene Zahlen."<<std::endl;
+	std::cout<<"\nIn unserer Liste sind "<<howManyInRand.size()<<" verschiedene Zahlen. \n"<<std::endl;
 
 	for ( int i = 0; i <= 100 ;++i) 
 	{
@@ -37,16 +38,25 @@ int main ()
 
 	for ( auto & i : hRandNum) 
 	{
-		//void remove(const& i);
 		notInRand.remove(i);
 	}
 
-	std::cout << "Und zwar alle ausser:";
+	std::cout << "Und zwar alle ausser:"<<std::endl;
 	while (!notInRand.empty()) 
 	{
 		std::cout << ' ' << *notInRand.begin();
 		notInRand.erase(notInRand.begin());
   	}
+  	std::cout<<std::endl;
+  	std::map <unsigned int,unsigned int> countsInRand;
 
+  	for ( auto & i : hRandNum)
+	{
+		countsInRand[i]++;
+	}
+	for (  int i = 0; i <= 100 ;++i)
+	{
+		std::cout<<i<<" existiert "<<countsInRand[i]<<"x"<<std::endl;
+	}
 return 0;
 }
