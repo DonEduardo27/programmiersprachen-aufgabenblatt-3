@@ -22,24 +22,15 @@ target_link_libraries(aufgabe2bis4
 add_dependencies(aufgabe2bis4 glfw ${COPY_BINARY})
 
 # Build 5
-add_executable(aufgabe5
-  aufgabe5.cpp
-  )
-  
-target_link_libraries(aufgabe5
-  glfw
-  ${GLFW_LIBRARIES}
-  m)
-add_dependencies(aufgabe5 glfw ${COPY_BINARY})
-
-# Build 7
-add_executable(aufgabe7
-  aufgabe7.cpp
+add_executable(aufgabe5und7
+  aufgabe5und7.cpp
   circle.cpp
   )
   
-target_link_libraries(aufgabe7
+target_link_libraries(aufgabe5und7
   glfw
   ${GLFW_LIBRARIES}
   m)
-add_dependencies(aufgabe7 glfw ${COPY_BINARY})
+add_dependencies(aufgabe5und7 glfw ${COPY_BINARY})
+
+

@@ -3,6 +3,7 @@
 # include <cmath>
 # include <vector>
 # include <algorithm>
+# include "circle.hpp"
 
 bool is_even(unsigned int a)
 {
@@ -65,8 +66,35 @@ TEST_CASE ("describe_evenTemplate","[even]")
 	REQUIRE ( std :: all_of ( v.begin () , v.end () , is_even ));
 
 }
+TEST_CASE ("describe_copyif","[copy_if]")
+{
+	std::vector<Circle>circles {{5.0f } ,{3.0f } ,{8.0f } ,{1.0f } ,{5.0f }};
+	std::vector<Circle>remcirc (3);//remainingcircles
+
+	std::copy_if( circles.begin(), circles.end(),
+                  remcirc.begin(),
+                  [] (Circle a) { return a.getradius() > 4.0f; });
+
+
+	REQUIRE ( std :: all_of ( remcirc.begin () , remcirc.end () ,  [] (Circle a) { return a.getradius() > 3.0f; }));
+
+}
 
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
 }
+
+
+
+/*Legen Sie einen std::vector mit Objekten der Klasse Circle an. Alle Kreise
+sollen verschiedene Radien haben. Zum Beispiel:
+// Vorrausgesetzt es gibt einen Konstruktor
+// der einen Radius als Parameter bekommt
+std :: vector < Circle > circles {{5.0 f } ,{3.0 f } ,{8.0 f } ,
+{1.0 f } ,{5.0 f }};
+Kopieren Sie anschliessend mit dem Algorithmus copy_if alle Kreise deren
+Radius größer als 4.0f ist, in einen zweiten std::vector. Verwenden Sie für das
+benötigte Prädikat wieder ein Lambda. Testen Sie danach mit std::all_of,
+dass die Radien im Zielcontainer alle größer drei sind (unter Verwendung eines
+Lambdas).*/
