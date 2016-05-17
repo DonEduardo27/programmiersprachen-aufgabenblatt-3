@@ -18,6 +18,17 @@ template <typename container>
 		C[second]=temp;
 	}
 
+template <typename container, typename function>
+
+	container filter(container const& C, function const& F)
+	{
+		container newCont;
+		for(auto i : C)
+		{
+			if(F(i))newCont.push_back(i);
+		}
+		return newCont;
+	}
 	
 
 TEST_CASE ("describe_factorial","[is_even]")
@@ -46,6 +57,13 @@ TEST_CASE ("describe_swapped","[swap]")
 	REQUIRE (onetosix[4]==2);
 	REQUIRE (onetosix[0]==6);
 	REQUIRE (onetosix[5]==1);	
+}
+TEST_CASE ("describe_evenTemplate","[even]")
+{
+    std :: vector < int > v {1 ,2 ,3 ,4 ,5 ,6,7,8,9,10,11,12};
+    v = filter(v,is_even);
+	REQUIRE ( std :: all_of ( v.begin () , v.end () , is_even ));
+
 }
 
 int main(int argc, char *argv[])

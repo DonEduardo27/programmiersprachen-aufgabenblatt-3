@@ -13,3 +13,39 @@ Map. Oben genanntes Beispiel entspricht doch dem der Telefonnummern. Als Key nim
 
 FIFO-Warteschlange von Druckaufträgen:
 Das Stichwort FIFO stand in der Vorlesung in Verbindung mit deque. Wenn wir also neue Aufträge hinten anhängen und bearbeitete vorne entfernen, wie das bei FIFO ist, wird deque nicht alle Elemente vorrutschen, was lange dauern würde, sondern Nummer 2 einfach Nummer 1 nennen usw. Sauber!
+
+
+
+3.1.2
+
+
+std :: map < string , int > matrikelnummern ;
+
+matrikelnummern [ " Max Mustermann " ] = 12345;
+matrikelnummern [ " Erika Mustermann " ] = 23523;
+
+exmatrikulation ( matrikelnummer [ " Fred Fuchs " ]);
+
+
+Warum gibt es Probleme?
+Mehrere Fred Fuchse?
+Search, removal, and insertion operations have logarithmic complexity?
+Freds Nummer kann geändert werden. Sein Name nicht. 
+
+auto i = matrikelnummern.insert(make_pair("Fred Fuchs", 34645)); <- alternative Möglichkeit
+auti i = i.find("Fred Fuchs");
+struct fullname{"Fred","Fuchs"} - könnte schneller gehen, da man erst nach fuchs, dann nach Fred suchen kann. je nach dem. auf jeden fall schneller als die ganze liste durchzugehen.
+
+Wie vermeidet man diese Problem? Welche Möglichkeiten gibt es denn zum
+Einfügen und zum Suchen?
+[5 Punkte]
+Hinweis: Welche Suchmethoden sind const?
+
+exmatrikulationsmöglichkeiten:
+  it=mymap.find('b');
+  mymap.erase (it);                   // erasing by iterator
+
+  mymap.erase ('c');                  // erasing by key
+
+  it=mymap.find ('e');
+  mymap.erase ( it, mymap.end() );    // erasing by range
