@@ -9,6 +9,10 @@ bool is_even(unsigned int a)
 {
 	return a%2==0;
 }
+bool is_odd(unsigned int a)
+{
+	return !is_even(a);
+}
 
 template <typename container>
 
@@ -34,19 +38,18 @@ template <typename container, typename function>
 
 TEST_CASE ("describe_factorial","[is_even]")
 {
+
 	std::vector <unsigned int> hRandNum(100);
 
 	for(auto& i : hRandNum) 
 	{
 		i = std::rand() % 101;
 	}
-	std::vector <unsigned int> evenRandNum; //weil ich fur .erase zu bjoern bin
 
-	for(auto& i : hRandNum) 
-	{
-		if(is_even(i)) evenRandNum.push_back(i) ;
-	}
-	REQUIRE ( std :: all_of ( evenRandNum.begin () , evenRandNum.end () , is_even ));
+	hRandNum.erase( std::remove_if(hRandNum.begin(), hRandNum.end(), is_odd), hRandNum.end() );
+
+	REQUIRE ( std :: all_of ( hRandNum.begin () , hRandNum.end () , is_even ));
+
 }
 
 TEST_CASE ("describe_swapped","[swap]")
@@ -80,21 +83,47 @@ TEST_CASE ("describe_copyif","[copy_if]")
 
 }
 
+TEST_CASE ("describe_sort","[is_sorted]")
+{
+	std::vector <Circle> tenDifferentCircles(10);
+
+	for(int i=0;i<10;i++) 
+	{
+		tenDifferentCircles[i].setradius(rand());
+	}
+	std::sort (tenDifferentCircles.begin(), tenDifferentCircles.end());
+
+	REQUIRE (std::is_sorted(tenDifferentCircles.begin(), tenDifferentCircles.end ()));
+}
+TEST_CASE ("describe_sort2","[is_sorted]")
+{
+	std::vector <Circle> twentyDifferentCircles(20);
+
+	for(int i=0;i<10;i++) 
+	{
+		twentyDifferentCircles[i].setradius(rand());
+	}
+
+
+	std::sort (twentyDifferentCircles.begin(), twentyDifferentCircles.end(),
+		[] (Circle a, Circle b) { return a.getradius() < b.getradius(); } );
+
+REQUIRE (std::is_sorted(twentyDifferentCircles.begin(), twentyDifferentCircles.end ()));
+	
+}
+
+TEST_CASE ("describe_add","[transform]")
+{
+std :: vector < int > v1 {1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9};
+std :: vector < int > v2 {9 ,8 ,7 ,6 ,5 ,4 ,3 ,2 ,1};
+std :: vector < int > v3 (10);
+
+std :: transform( v1.begin(), v1.end(), v2.begin(), v3.begin(), 
+                    [] (int a, int b) { return a + b; });
+	
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
 }
-
-
-
-/*Legen Sie einen std::vector mit Objekten der Klasse Circle an. Alle Kreise
-sollen verschiedene Radien haben. Zum Beispiel:
-// Vorrausgesetzt es gibt einen Konstruktor
-// der einen Radius als Parameter bekommt
-std :: vector < Circle > circles {{5.0 f } ,{3.0 f } ,{8.0 f } ,
-{1.0 f } ,{5.0 f }};
-Kopieren Sie anschliessend mit dem Algorithmus copy_if alle Kreise deren
-Radius größer als 4.0f ist, in einen zweiten std::vector. Verwenden Sie für das
-benötigte Prädikat wieder ein Lambda. Testen Sie danach mit std::all_of,
-dass die Radien im Zielcontainer alle größer drei sind (unter Verwendung eines
-Lambdas).*/

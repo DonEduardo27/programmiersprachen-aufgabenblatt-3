@@ -48,12 +48,15 @@ int main ()
 		notInRand.erase(notInRand.begin());
   	}
   	std::cout<<std::endl;
+
   	std::map <unsigned int,unsigned int> countsInRand;
 
   	for ( auto & i : hRandNum)
 	{
-		countsInRand[i]++;
+		++countsInRand[i];
+		//<5 = 1>
 	}
+
 	for (  int i = 0; i <= 100 ;++i)
 	{
 		std::cout<<i<<" existiert "<<countsInRand[i]<<"x"<<std::endl;

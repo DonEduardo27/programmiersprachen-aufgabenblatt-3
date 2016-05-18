@@ -9,9 +9,7 @@ Circle(float rad);
 
 void setradius(double r);      
 double getradius();            
-double area();           
-double circum();
-double diameter();  
+
 
 bool operator< (Circle const& a);
 bool operator> (Circle const& a);
