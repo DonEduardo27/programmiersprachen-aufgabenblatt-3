@@ -8,7 +8,7 @@ Circle();
 Circle(float rad);
 
 void setradius(double r);      
-double getradius();            
+double getradius() const;
 
 
 bool operator< (Circle const& a);

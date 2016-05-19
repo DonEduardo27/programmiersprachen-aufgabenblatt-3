@@ -15,7 +15,7 @@ void Circle::setradius(double r)
 	rad=r;
 }      
 
-double Circle::getradius()
+double Circle::getradius() const
 {
 	return rad;
 }

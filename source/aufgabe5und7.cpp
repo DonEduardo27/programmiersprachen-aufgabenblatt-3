@@ -14,9 +14,9 @@ bool is_odd(unsigned int a)
 	return !is_even(a);
 }
 
-template <typename container>
+template <typename container, typename number>
 
-	void swap(int first ,int second, container& C )
+	void swap(number const& first ,number const& second, container& C )
 	{
 		auto temp = C[first];
 		C[first]=C[second];
@@ -35,12 +35,20 @@ template <typename container, typename function>
 		return newCont;
 	}
 	
+class circless //unser Functor
+{
+public:
+	bool operator()(Circle const& a,Circle const& b)
+	{
+		return a.getradius() < b.getradius();
+	}
+};
 
 TEST_CASE ("describe_factorial","[is_even]")
 {
 
 	std::vector <unsigned int> hRandNum(100);
-
+ 
 	for(auto& i : hRandNum) 
 	{
 		i = std::rand() % 101;
@@ -87,11 +95,12 @@ TEST_CASE ("describe_sort","[is_sorted]")
 {
 	std::vector <Circle> tenDifferentCircles(10);
 
-	for(int i=0;i<10;i++) 
+	for(int i=0;i<10;++i) 
 	{
 		tenDifferentCircles[i].setradius(rand());
 	}
-	std::sort (tenDifferentCircles.begin(), tenDifferentCircles.end());
+
+	std::sort(tenDifferentCircles.begin(), tenDifferentCircles.end());
 
 	REQUIRE (std::is_sorted(tenDifferentCircles.begin(), tenDifferentCircles.end ()));
 }
@@ -122,6 +131,23 @@ std :: transform( v1.begin(), v1.end(), v2.begin(), v3.begin(),
                     [] (int a, int b) { return a + b; });
 	
 }
+
+TEST_CASE ("describe_sort3","[is_FUNCORT]")
+{
+	std::vector <Circle> twentyDifferentCircles(20);
+
+	for(int i=0;i<20;i++) 
+	{
+		twentyDifferentCircles[i].setradius(rand()%1000);
+	}
+
+
+	std::sort(twentyDifferentCircles.begin(), twentyDifferentCircles.end(), circless());
+
+REQUIRE (std::is_sorted(twentyDifferentCircles.begin(), twentyDifferentCircles.end ()));
+	
+}
+
 
 int main(int argc, char *argv[])
 {
